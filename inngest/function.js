@@ -1,11 +1,14 @@
 import { inngest } from './client'
 import { prisma } from '@/lib/prisma'
 
-// Inngest function to save user data to the database
+// Create user
 export const syncUserCreation = inngest.createFunction(
-    { id: 'sync-user-create' },
-    { event: 'clerk/user.created' },
-
+    {
+        id: 'sync-user-create',
+        triggers: {
+            event: 'clerk/user.created'
+        }
+    },
     async ({ event }) => {
         const { data } = event
 
@@ -20,11 +23,14 @@ export const syncUserCreation = inngest.createFunction(
     }
 )
 
-// Inngest function to update user data in database
+// Update user
 export const syncUserUpdation = inngest.createFunction(
-    { id: 'sync-user-update' },
-    { event: 'clerk/user.updated' },
-
+    {
+        id: 'sync-user-update',
+        triggers: {
+            event: 'clerk/user.updated'
+        }
+    },
     async ({ event }) => {
         const { data } = event
 
@@ -41,11 +47,14 @@ export const syncUserUpdation = inngest.createFunction(
     }
 )
 
-// Inngest function to delete user data from database
+// Delete user
 export const syncUserDeletion = inngest.createFunction(
-    { id: 'sync-user-delete' },
-    { event: 'clerk/user.deleted' },
-
+    {
+        id: 'sync-user-delete',
+        triggers: {
+            event: 'clerk/user.deleted'
+        }
+    },
     async ({ event }) => {
         const { data } = event
 
